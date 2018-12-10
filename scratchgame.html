@@ -2,25 +2,58 @@
   <head>
     <style>
       div{
-        width:400px;
-        height:400px;
-        background-color:red;
+        width:220px;
+        height:220px;
+        background:url("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png");
+        margin-left:42.5%;
+        margin-right:50%;
+      }
+      #result{
+        text-align:center;
+      }
+      button{
+        margin-left:47%;
+        margin-right:47%;
+      }
+      #ScratchNum{
+        opacity:0;
+        position:Fixed;
+        margin-top: -9%;
+        margin-right:50%;
+        margin-left:50%;
       }
     </style>
   </head>
   <body>
-  <div onmouseover = "scratchMe()"></div>
-<h1 id="test"></h1>
+ <h1>scratch the QR code to win the prize!</h1>
+<h1 id="winNum"></h1>
+ <div onmouseover = "scratchMe()" id="QRcode"></div>
+ <h1 id="ScratchNum"></h1>
+<h1 id="result"></h1>
+<button onclick="location.reload()">Play Again</button>
 <script>
   // Goal. to create a cratch-off game that will reveal a number when the mouse is dragged over a div box
   // scratch off box == scratchCover
   // number box = numberBox
   // step1) Build div box that will fade when the mouse is dragged over it.
   var op = 1;
+  var op2 = 0;
+  var randNum1 = Math.floor(Math.random()* 10);
+  var randNum2 = Math.floor(Math.random()* 10);
+  document.getElementById('winNum').innerHTML = "The number to win is " + randNum1;
+  document.getElementById('ScratchNum').innerHTML = randNum2;
   function scratchMe(){
     op -= 0.1;
+    op2 += 0.1;
     //test to see if the op is decreasing
-    document.getElementById('test').innerHTML = op.toFixed(2);
+    document.getElementById('QRcode').style.opacity = op;
+    document.getElementById('ScratchNum').style.opacity = op2;
+    if(op<0 && (randNum1 == randNum2)){
+      document.getElementById('result').innerHTML = " you win! The number match! you win 1000000000000000000 dollar! ";
+    }
+    else if(op<0 && (randNum1 != randNum2)){
+      document.getElementById('result').innerHTML = " you lose! Your number is " + randNum2;
+    }
   }
 </script>
   </body>
